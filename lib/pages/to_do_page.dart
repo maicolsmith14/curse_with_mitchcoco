@@ -11,16 +11,15 @@ class ToDoPage extends StatefulWidget {
 }
 
 class _ToDoPageState extends State<ToDoPage> {
-
-  List _pages = [
+  List pages = [
     HomePage(),
-    SettingsPage(),
-    ProfilePage(),
+    const SettingsPage(),
+    const ProfilePage(),
   ];
 
   int _selectedIndex = 0;
 
-  void _selectPage (int index){
+  void _selectPage(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -28,36 +27,35 @@ class _ToDoPageState extends State<ToDoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.blue,
-        title: Text(
-          "Navigation practice",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 25
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
+          backgroundColor: Colors.blue[900],
+          foregroundColor: Colors.white,
+          title: const Text(
+            "@invdiostodoestuyo",
           ),
+          actions: const [
+            CircleAvatar(
+              backgroundImage: NetworkImage(
+                "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600",
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
         ),
-      ),
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectPage,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "H O M E"
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "S E T T I N G S"
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "P R O F I L E"
-          ),
-        ],
+        body: pages[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: _selectPage,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "H O M E"),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: "S E T T I N G S"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "P R O F I L E"),
+          ],
+        ),
       ),
     );
   }
